@@ -32,8 +32,8 @@ const CarouselImageSection = () => {
       <Image
         src={imageSlider[index]}
         alt="services images"
-        width={1200}
-        height={1200}
+        width={3200}
+        height={3200}
         priority
         className="w-full h-full object-cover flex-shrink-0 animate-fade-in brightness-95"
       />

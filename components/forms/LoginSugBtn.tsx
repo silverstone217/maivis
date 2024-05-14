@@ -1,11 +1,12 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const LoginSugBtn = () => {
   return (
-    <form action={""}>
-      <Button>Connexion</Button>
-    </form>
+    <Button asChild>
+      <Link href={"/sign-in"}>Connexion</Link>
+    </Button>
   );
 };
 

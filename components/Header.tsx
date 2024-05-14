@@ -8,6 +8,7 @@ import NavigationSheet from "./NavigationSheet";
 import SwitchThemeMode from "./SwitchThemeMode";
 import logo from "../public/images/logo3.png";
 import Image from "next/image";
+import LogoComponent from "./LogoComponent";
 
 const Header = () => {
   const pathName = usePathname();
@@ -22,25 +23,7 @@ const Header = () => {
         {/* logo and pages */}
         <div className="flex items-center gap-16">
           {/* logo */}
-          <Link
-            href={"/"}
-            className="text-[20px] tracking-wide flex items-center"
-          >
-            <Image
-              src={logo}
-              alt="logo Maivis"
-              priority
-              width={500}
-              height={500}
-              className="w-auto h-10"
-            />
-            {/* <span className="font-extrabold px-1 pt-1 bg-primary rounded-t-xl text-white">
-              M
-            </span> */}
-            <span className="mt-1 ml-[0.5px] text-[18px] font-semibold">
-              aivis
-            </span>
-          </Link>
+          <LogoComponent />
           {/* pages */}
           <PageLinks />
         </div>
