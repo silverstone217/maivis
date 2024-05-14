@@ -37,18 +37,18 @@ const LoginForm = () => {
       {/* password */}
       <div className="grid w-full max-w-xl items-center gap-1.5">
         <div className="flex w-full items-center justify-between">
-          <Label htmlFor="password" className="">
+          <Label htmlFor="password" className="text-white">
             Mot de passe
           </Label>
 
           {isSecure === "password" ? (
             <EyeOff
-              className="cursor-pointer size-5"
+              className="cursor-pointer size-5 text-white"
               onClick={() => setIsSecure("text")}
             />
           ) : (
             <Eye
-              className="cursor-pointer size-5"
+              className="cursor-pointer size-5 text-white"
               onClick={() => setIsSecure("password")}
             />
           )}
