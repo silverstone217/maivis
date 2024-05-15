@@ -6,8 +6,6 @@ import React from "react";
 import LoginSugBtn from "./forms/LoginSugBtn";
 import NavigationSheet from "./NavigationSheet";
 import SwitchThemeMode from "./SwitchThemeMode";
-import logo from "../public/images/logo3.png";
-import Image from "next/image";
 import LogoComponent from "./LogoComponent";
 
 const Header = () => {

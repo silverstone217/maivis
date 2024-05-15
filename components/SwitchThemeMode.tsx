@@ -1,12 +1,20 @@
 "use client";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 
 const SwitchThemeMode = () => {
   const { setTheme, theme } = useTheme();
+
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <Link
