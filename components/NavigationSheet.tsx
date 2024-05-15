@@ -33,8 +33,8 @@ const NavigationSheet = () => {
             <SheetClose asChild>
               <Link href={"/profile"}>
                 <UserPicture user={user} />
-                <div className="capitalize flex flex-col items-start justify-start">
-                  <span className="text-sm font-bold line-clamp-1">
+                <div className=" flex flex-col items-start justify-start">
+                  <span className="text-sm font-bold line-clamp-1 capitalize">
                     {user?.name}
                   </span>
                   <span className="text-xs font-normal opacity-80 line-clamp-1">

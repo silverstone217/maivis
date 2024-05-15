@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { changeName } from "@/utils/fonctions";
 import { User } from "next-auth";
 import { useToast } from "./ui/use-toast";
+import Link from "next/link";
 
 const HeaderUserInfo = () => {
   const { data: session } = useSession();
@@ -50,9 +51,21 @@ const HeaderUserInfo = () => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Dashboard</DropdownMenuItem>
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Notifications</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href={"/dashboard"} className="cursor-pointer ">
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href={"/profile"} className="cursor-pointer ">
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href={"/notifications"} className="cursor-pointer ">
+            Notifications
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <span

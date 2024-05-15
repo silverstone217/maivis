@@ -1,9 +1,18 @@
 import BackgroundComponent from "@/components/auth/BackgroundComponent";
 import LoginForm from "@/components/forms/LoginForm";
 import LogoComponent from "@/components/LogoComponent";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const page = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (session?.user) {
+    redirect("/");
+  }
+
   return (
     <main className="w-dvw h-dvh  overflow-x-hidden overflow-y-auto">
       <div className="w-full max-w-7xl grid  lg:grid-cols-2 grid-cols-1 h-full mx-auto transition-all duration-300 ease-in-out">
