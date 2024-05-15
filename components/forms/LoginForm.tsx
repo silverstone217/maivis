@@ -20,7 +20,7 @@ const LoginForm = () => {
     >
       {/* email */}
       <div className="grid w-full max-w-xl items-center gap-1.5">
-        <Label htmlFor="email" className="text-white">
+        <Label htmlFor="email" className="">
           Email
         </Label>
         <Input
@@ -37,18 +37,18 @@ const LoginForm = () => {
       {/* password */}
       <div className="grid w-full max-w-xl items-center gap-1.5">
         <div className="flex w-full items-center justify-between">
-          <Label htmlFor="password" className="text-white">
+          <Label htmlFor="password" className="">
             Mot de passe
           </Label>
 
           {isSecure === "password" ? (
             <EyeOff
-              className="cursor-pointer size-5 text-white"
+              className="cursor-pointer size-5 "
               onClick={() => setIsSecure("text")}
             />
           ) : (
             <Eye
-              className="cursor-pointer size-5 text-white"
+              className="cursor-pointer size-5 "
               onClick={() => setIsSecure("password")}
             />
           )}
@@ -64,7 +64,7 @@ const LoginForm = () => {
         />
         <Link
           href={"/sign-up"}
-          className="text-white text-sm text-right text-balance"
+          className=" text-xs lg:text-sm text-right text-balance"
         >
           <span>Mot de passe oublié?</span> <strong>Reinintialiser</strong>
         </Link>
@@ -74,7 +74,7 @@ const LoginForm = () => {
         Continuer
       </Button>
 
-      <Link href={"/sign-up"} className="text-white text-sm text-balance">
+      <Link href={"/sign-up"} className=" text-xs lg:text-sm text-balance">
         <span>Vous n avez pas compte?</span> <strong>Inscrivez-vous</strong>
       </Link>
     </form>

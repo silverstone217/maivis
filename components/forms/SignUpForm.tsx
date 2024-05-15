@@ -130,22 +130,6 @@ const SignUpForm = () => {
         />
       </div>
 
-      {/* password */}
-      {/* <div className="grid w-full max-w-xl items-center gap-1.5">
-        <Label htmlFor="cPassword" className="">
-          Confirmer le mot de passe
-        </Label>
-        <Input
-          type="password"
-          id="cPassword"
-          //   placeholder="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          minLength={5}
-          maxLength={40}
-        />
-      </div> */}
-
       {/* submit */}
       <Button className="grid w-full max-w-xl items-center gap-1.5">
         Continuer
