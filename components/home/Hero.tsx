@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from "react";
 import { Button } from "../ui/button";
 import CarouselImageSection from "./CarouselImageSection";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -34,9 +35,11 @@ const Hero = () => {
         {/* btn get started */}
 
         <div className="w-full flex items-center justify-center gap-4 flex-wrap animate-slide-down">
-          <Button className="flex-1">Reserver maintenant</Button>
-          <Button className="flex-1" variant={"outline"}>
-            Devenir Membre
+          <Button className="flex-1" asChild>
+            <Link href={"/services"}> Reserver maintenant</Link>
+          </Button>
+          <Button className="flex-1" variant={"outline"} asChild>
+            <Link href={"/dashboard"}> Devenir Membre</Link>
           </Button>
         </div>
       </section>
