@@ -54,6 +54,7 @@ model User {
   password      String?
   image         String?
   role          String @default("user")
+  tel           String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
@@ -69,7 +70,7 @@ model Jobber{
   salary        String?
   typeSalary    String @default("monthly")
   transportFees String?
-  tel           String
+  // tel           String
   address       String?
   isAvailable   Boolean @default(true)
   job           String?

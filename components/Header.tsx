@@ -7,13 +7,19 @@ import LoginSugBtn from "./forms/LoginSugBtn";
 import NavigationSheet from "./NavigationSheet";
 import SwitchThemeMode from "./SwitchThemeMode";
 import LogoComponent from "./LogoComponent";
+import { useSession } from "next-auth/react";
+import HeaderUserInfo from "./HeaderUserInfo";
 
 const Header = () => {
   const pathName = usePathname();
+
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
   if (pathName.includes("sign")) return null;
 
   return (
-    <div className=" w-dvw py-4 shadow-md">
+    <div className=" w-dvw py-4 shadow">
       <div
         className="w-full max-w-7xl mx-auto px-4 2xl:px-0 flex items-center justify-between 
       transition-all duration-300 ease-in-out"
@@ -28,7 +34,7 @@ const Header = () => {
         {/* auth buttons */}
         <div className="hidden lg:flex items-center gap-2">
           <SwitchThemeMode />
-          <LoginSugBtn />
+          {user ? <HeaderUserInfo /> : <LoginSugBtn />}
         </div>
         <div className="lg:hidden">
           <NavigationSheet />

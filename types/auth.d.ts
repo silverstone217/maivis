@@ -4,6 +4,7 @@ export type User = {
   name: string | null;
   token?: string | null;
   role: string;
+  tel: string;
   image: string | null;
   emailVerified: Date | null;
   createdAt: Date;
@@ -17,6 +18,7 @@ declare module "next-auth" {
     id: string;
     role: string;
     image: string | null;
+    tel: string;
     emailVerified: Date | null;
     createdAt: Date;
     updatedAt: Date;
@@ -26,9 +28,6 @@ declare module "next-auth" {
     user: User & {
       id: string;
     };
-    token: {
-      id: string;
-      role: string;
-    };
+    token: User;
   }
 }

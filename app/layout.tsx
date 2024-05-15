@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/toaster";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,14 +33,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <AuthProvider> */}
-          <div>
-            <Header />
-            {children}
-            <Footer />
-            {/* <Toaster /> */}
-          </div>
-          {/* </AuthProvider> */}
+          <AuthProvider>
+            <div>
+              <Header />
+              {children}
+              <Footer />
+              <Toaster />
+            </div>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

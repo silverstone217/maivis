@@ -11,9 +11,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LoginSugBtn from "./forms/LoginSugBtn";
 import SwitchThemeMode from "./SwitchThemeMode";
+import { UserPicture } from "./HeaderUserInfo";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
 
 const NavigationSheet = () => {
   const pathName = usePathname();
+  const { data: session } = useSession();
+  const user = session?.user;
+
   return (
     <Sheet>
       <SheetTrigger>
@@ -21,8 +28,30 @@ const NavigationSheet = () => {
       </SheetTrigger>
       <SheetContent>
         <div className="w-full">
+          {/* profile */}
+          {user && (
+            <SheetClose asChild>
+              <Link href={"/profile"}>
+                <UserPicture user={user} />
+                <div className="capitalize flex flex-col items-start justify-start">
+                  <span className="text-sm font-bold line-clamp-1">
+                    {user?.name}
+                  </span>
+                  <span className="text-xs font-normal opacity-80 line-clamp-1">
+                    {user?.email}
+                  </span>
+                </div>
+              </Link>
+            </SheetClose>
+          )}
+          {/* divider */}
+          <div
+            className={`bg-gray-700 w-full ${
+              user ? "border-b-[0.5px]" : ""
+            } my-4 transition-all duration-300 ease-in-out`}
+          />
           {/* Links */}
-          <div className="w-full flex flex-col items-start justify-start gap-2 mt-10">
+          <div className="w-full flex flex-col items-start justify-start gap-2 transition-all duration-300 ease-in-out">
             {Links.map((link, index) => (
               <SheetClose asChild key={index}>
                 <Link
@@ -47,10 +76,45 @@ const NavigationSheet = () => {
           <SwitchThemeMode />
           {/* Btn auth */}
           <div className="my-3" />
-          <LoginSugBtn />
+          {user ? <LogOutSugBtn /> : <LoginSugBtn />}
         </div>
       </SheetContent>
     </Sheet>
+  );
+};
+
+const LogOutSugBtn = () => {
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await signOut({
+        redirect: false,
+        callbackUrl: "/",
+      });
+      toast({
+        title: "Déconnexion",
+        description: "Vous êtes maintenant déconnecté",
+        duration: 2000,
+      });
+    } catch (error) {
+      const err = error as Error;
+      toast({
+        title: "Oh! Une erreur s'est produite!",
+        description: err.message,
+        variant: "destructive",
+        duration: 2000,
+      });
+    }
+  };
+  return (
+    <Button
+      variant={"destructive"}
+      onClick={handleLogout}
+      className="transition-all duration-300 ease-in-out"
+    >
+      Deconnexion
+    </Button>
   );
 };
 

@@ -34,7 +34,9 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!existingUser) {
-          throw new Error("Email is invalid, try another or sign up!");
+          throw new Error(
+            "Email est invalide, entrer un autre ou inscrivez-vous!"
+          );
         }
 
         if (!existingUser?.password) return null;
@@ -45,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!passwordMatch) {
-          throw new Error("Invalid password!");
+          throw new Error("Mot de passe incorrect!");
         }
 
         const { password: pwd, ...rest } = existingUser;
@@ -71,6 +73,11 @@ export const authOptions: NextAuthOptions = {
         return {
           ...token,
           ...profile,
+          id: user.id,
+          role: user.role,
+          name: user.name,
+          email: user.email,
+          tel: user.tel,
         };
       }
       return token;
@@ -82,9 +89,13 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           name: token.name,
-          // id : token.id,
-          // role : token.role,
-          ...user,
+          id: token.id,
+          role: token.role,
+          email: token.email,
+          tel: token.tel,
+          emailVerified: token.emailVerified,
+          createdAt: token.createdAt,
+          updatedAt: token.updatedAt,
         },
       };
     },

@@ -6,6 +6,8 @@ import SelectOptions from "../SelectOptions";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
+import { useToast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const options = [
   {
@@ -23,7 +25,7 @@ const placeholder = "choisies ta situation...";
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("");
@@ -31,11 +33,64 @@ const SignUpForm = () => {
   const [isSecure, setIsSecure] = useState<"password" | "text">("password");
 
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    const formData = {
+      email,
+      password,
+      name,
+      phone,
+      role,
+    };
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (data.error === true) {
+        toast({
+          description: data.message,
+          variant: "destructive",
+          duration: 2000,
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+      toast({
+        description: data.message,
+        variant: "default",
+        duration: 2000,
+      });
+      setTimeout(() => setLoading(false), 1500);
+      setTimeout(() => router.push("/sign-in"), 1000);
+    } catch (error) {
+      const err = error as Error;
+      const message = err.message;
+      toast({
+        description: message,
+        variant: "destructive",
+        duration: 2000,
+      });
+      setTimeout(() => setLoading(false), 1500);
+    }
+  };
 
   return (
     <form
-      action=""
-      method="post"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
       className="w-full flex flex-col items-center gap-6 px-4"
     >
       {/* names */}
@@ -51,6 +106,8 @@ const SignUpForm = () => {
           onChange={(e) => setName(e.target.value)}
           minLength={5}
           maxLength={40}
+          required
+          disabled={loading}
         />
       </div>
 
@@ -67,6 +124,8 @@ const SignUpForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           minLength={5}
           maxLength={40}
+          required
+          disabled={loading}
         />
       </div>
 
@@ -83,6 +142,8 @@ const SignUpForm = () => {
           onChange={(e) => setPhone(e.target.value)}
           minLength={9}
           maxLength={9}
+          required
+          disabled={loading}
         />
       </div>
 
@@ -122,17 +183,22 @@ const SignUpForm = () => {
         <Input
           type={isSecure}
           id="password"
-          //   placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           minLength={5}
           maxLength={40}
+          required
+          disabled={loading}
         />
       </div>
 
       {/* submit */}
-      <Button className="grid w-full max-w-xl items-center gap-1.5">
-        Continuer
+      <Button
+        type="submit"
+        disabled={loading}
+        className="grid w-full max-w-xl items-center gap-1.5"
+      >
+        {loading ? "en cours..." : "Continuer"}
       </Button>
 
       <Link href={"/sign-in"} className="text-sm">

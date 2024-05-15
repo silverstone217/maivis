@@ -36,7 +36,12 @@ const SelectOptions = ({
   required,
 }: Props) => {
   return (
-    <Select required={required}>
+    <Select
+      disabled={loading}
+      required={required}
+      value={value}
+      onValueChange={onChange}
+    >
       <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
