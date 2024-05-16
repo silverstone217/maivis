@@ -88,50 +88,50 @@ const NewProfile = () => {
       const promises: Promise<void>[] = [];
 
       if (allImages.length > 0) {
-        // for (let i = 0; i < allImages.length; i++) {
-        //   const imageId = v4().toString().replaceAll("-", "");
-        //   const imgStorageRef = ref(storage, `/maivis/images/${imageId}`);
-
-        //   const uploadTask = uploadBytesResumable(imgStorageRef, allImages[i]);
-
-        //   // Handle upload
-        //   await new Promise<void>((resolve, reject) => {
-        //     uploadTask.on(
-        //       "state_changed",
-        //       (snapshot) => {
-        //         const progress =
-        //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        //         console.log({ image: i, progress: progress });
-        //       },
-        //       (err) => {
-        //         console.log("Upload error: " + err.message);
-        //         setTimeout(() => setLoading(false), 1000);
-        //         reject(err);
-        //       },
-        //       () => {
-        //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        //           // console.log("File available at", downloadURL);
-        //           urls.push(downloadURL);
-        //           resolve();
-        //         });
-        //       }
-        //     );
-        //   });
-        // }
-        // await Promise.all(promises);
-        // console.log({ data: urls, size: urls.length });
-
-        for (let img of allImages) {
+        for (let i = 0; i < allImages.length; i++) {
           const imageId = v4().toString().replaceAll("-", "");
           const imgStorageRef = ref(storage, `/maivis/images/${imageId}`);
 
-          await uploadBytes(imgStorageRef, img).then(async (snapchot) => {
-            await getDownloadURL(snapchot.ref).then(async (url) => {
-              urls.push(url);
-            });
+          const uploadTask = uploadBytesResumable(imgStorageRef, allImages[i]);
+
+          // Handle upload
+          await new Promise<void>((resolve, reject) => {
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log({ image: i, progress: progress });
+              },
+              (err) => {
+                console.log("Upload error: " + err.message);
+                setTimeout(() => setLoading(false), 1000);
+                reject(err);
+              },
+              () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  // console.log("File available at", downloadURL);
+                  urls.push(downloadURL);
+                  resolve();
+                });
+              }
+            );
           });
         }
+        await Promise.all(promises);
         console.log({ data: urls, size: urls.length });
+
+        // for (let img of allImages) {
+        //   const imageId = v4().toString().replaceAll("-", "");
+        //   const imgStorageRef = ref(storage, `/maivis/images/${imageId}`);
+
+        //   await uploadBytes(imgStorageRef, img).then(async (snapchot) => {
+        //     await getDownloadURL(snapchot.ref).then(async (url) => {
+        //       urls.push(url);
+        //     });
+        //   });
+        // }
+        // console.log({ data: urls, size: urls.length });
 
         return urls;
       }
