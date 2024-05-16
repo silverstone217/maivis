@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Jobber } from "@prisma/client";
 import DashboardComponent from "./DashboardComponent";
+import MyInfosComponent from "./MyInfosComponent";
 
 export type IndexTabValue = "dashboard" | "infos" | "activity";
 
@@ -32,7 +33,9 @@ const MainDashBoardComp = ({ myJob }: Props) => {
       </TabsContent>
 
       {/* infos */}
-      <TabsContent value="infos">Change your infos here.</TabsContent>
+      <TabsContent value="infos">
+        <MyInfosComponent myJob={myJob} setIndexTab={setIndexTab} />
+      </TabsContent>
 
       {/* activities */}
       <TabsContent value="activity">

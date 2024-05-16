@@ -27,8 +27,8 @@ const page = async () => {
   const myJob = await getJob(id);
 
   return (
-    <main className="flex w-dvw flex-col items-center justify-between p-4">
-      <div className="max-w-7xl w-full mx-auto space-y-10 lg:space-y-16">
+    <main className="flex w-screen flex-col items-center justify-between p-4 overflow-x-hidden">
+      <div className="max-w-7xl w-full mx-auto space-y-10 lg:space-y-16 overflow-x-hidden">
         <MainDashBoardComp myJob={myJob} />
       </div>
     </main>

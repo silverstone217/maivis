@@ -1,5 +1,5 @@
 export enum paymentOptions {
-  mpesa = "mpesa",
+  mobile = "mobile",
   cash = "cash",
   paypal = "paypal",
   creditCard = "creditCard",
