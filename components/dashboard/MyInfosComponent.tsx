@@ -70,7 +70,7 @@ const MyInfosComponent = ({ myJob, setIndexTab }: Props) => {
     }
   };
 
-  if (myJob) {
+  if (!myJob) {
     return <NewProfile />;
   }
 
