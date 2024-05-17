@@ -13,7 +13,7 @@ const categories = [
     id: 1,
     title: "Femme de menage",
     icon: cleaning,
-    path: "nettoyage",
+    path: "femme de menage",
   },
   {
     id: 2,
