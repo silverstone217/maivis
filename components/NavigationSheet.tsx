@@ -69,6 +69,23 @@ const NavigationSheet = () => {
                 </Link>
               </SheetClose>
             ))}
+            {user && (
+              <SheetClose asChild>
+                <Link
+                  href={"/dashboard"}
+                  className={`text-[18px] font-medium tracking-wider capitalize w-full  py-1 px-2
+                    ${
+                      pathName.toLowerCase() === "/dashboard".toLowerCase()
+                        ? "text-primary"
+                        : ""
+                    }
+                    transition-all duration-300 ease-in-out
+                  `}
+                >
+                  Dashboard
+                </Link>
+              </SheetClose>
+            )}
           </div>
 
           <div className="my-16" />

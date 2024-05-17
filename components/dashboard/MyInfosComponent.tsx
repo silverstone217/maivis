@@ -2,15 +2,9 @@ import { Jobber } from "@prisma/client";
 import React, { ChangeEvent, useState } from "react";
 import { IndexTabValue } from "./MainDashBoardComp";
 import { useSession } from "next-auth/react";
-import { jobOptions as options, salaryTypeData } from "@/utils/data";
-import SelectOptions from "../SelectOptions";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Input } from "../ui/input";
-import Image from "next/image";
 import { useToast } from "../ui/use-toast";
-import { X } from "lucide-react";
 import NewProfile from "./NewProfile";
+import MyUpdateProfileComp from "./MyUpdateProfileComp";
 
 type Props = {
   myJob: Jobber | null;
@@ -74,7 +68,11 @@ const MyInfosComponent = ({ myJob, setIndexTab }: Props) => {
     return <NewProfile />;
   }
 
-  return <div>MyInfosComponent</div>;
+  return (
+    <div>
+      <MyUpdateProfileComp myJob={myJob} setIndexTab={setIndexTab} />
+    </div>
+  );
 };
 
 export default MyInfosComponent;

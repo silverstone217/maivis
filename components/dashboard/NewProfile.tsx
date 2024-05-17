@@ -23,12 +23,15 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { storage } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 const NewProfile = () => {
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
   const user = session?.user;
   const { toast } = useToast();
+
+  const router = useRouter();
 
   //   forms variables
   const [job, setJob] = useState("");
@@ -121,18 +124,6 @@ const NewProfile = () => {
         await Promise.all(promises);
         console.log({ data: urls, size: urls.length });
 
-        // for (let img of allImages) {
-        //   const imageId = v4().toString().replaceAll("-", "");
-        //   const imgStorageRef = ref(storage, `/maivis/images/${imageId}`);
-
-        //   await uploadBytes(imgStorageRef, img).then(async (snapchot) => {
-        //     await getDownloadURL(snapchot.ref).then(async (url) => {
-        //       urls.push(url);
-        //     });
-        //   });
-        // }
-        // console.log({ data: urls, size: urls.length });
-
         return urls;
       }
     } catch (error) {
@@ -205,6 +196,7 @@ const NewProfile = () => {
       setPaimentMoment("");
       setTransportFees("0");
       setTimeout(() => setLoading(false), 1500);
+      router.refresh();
     } catch (error) {
       const err = error as Error;
       const message = err.message;
@@ -365,7 +357,7 @@ const NewProfile = () => {
                   <Image
                     src={URL.createObjectURL(image)}
                     alt="image"
-                    className="w-full h-auto rounded"
+                    className="w-full h-auto rounded max-h-32 object-cover"
                     priority
                     width={2000}
                     height={2000}
@@ -412,7 +404,6 @@ const NewProfile = () => {
           />
         </div>
         {/* transport fees */}
-        {/* salary */}
         <div className="grid w-full  items-center gap-1.5 box-border">
           <Label htmlFor="transportFee" className="">
             Votre frais de transport en $ USD
