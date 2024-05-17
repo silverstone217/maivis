@@ -472,7 +472,8 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
             paimentOption.replace(/ /g, "") === "" ||
             (paimentMoment === myJob.paimentMoment &&
               typeSalary === myJob.typeSalary &&
-              paimentOption === myJob.paimentOption)
+              paimentOption === myJob.paimentOption &&
+              transportFees === myJob.transportFees)
           }
           className="grid w-full  items-center gap-1.5 box-border"
           onClick={() => handleSubmitPaiment()}
