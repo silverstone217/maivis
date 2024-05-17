@@ -267,42 +267,6 @@ const NewProfile = () => {
             className="min-h-44"
           />
         </div>
-        {/* salary */}
-        <div className="grid w-full items-center gap-1.5 box-border">
-          <Label htmlFor="salary" className="">
-            Votre salaire en $ USD*
-          </Label>
-          <Input
-            type="number"
-            id="salary"
-            placeholder="150"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
-            minLength={1}
-            maxLength={4}
-            min={1}
-            max={2000}
-            required
-            disabled={loading}
-          />
-        </div>
-
-        {/* Salary type */}
-        <div className="grid w-full items-center gap-1.5 box-border">
-          <Label htmlFor="salaryType" className="">
-            Votre option de salaire*
-          </Label>
-          <SelectOptions
-            options={salaryTypeData}
-            value={typeSalary}
-            onChange={(value) => setTypeSalary(value)}
-            label={"Votre option salaire"}
-            placeholder={"Choisir le type de salaire adapter a votre travail"}
-            loading={loading}
-            setLoading={setLoading}
-            required={true}
-          />
-        </div>
 
         {/* address */}
         <div className="grid w-full  items-center gap-1.5 box-border">
@@ -366,6 +330,44 @@ const NewProfile = () => {
               ))}
           </div>
         </div>
+
+        {/* salary */}
+        <div className="grid w-full items-center gap-1.5 box-border">
+          <Label htmlFor="salary" className="">
+            Votre salaire en $ USD*
+          </Label>
+          <Input
+            type="number"
+            id="salary"
+            placeholder="150"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+            minLength={1}
+            maxLength={4}
+            min={1}
+            max={2000}
+            required
+            disabled={loading}
+          />
+        </div>
+
+        {/* Salary type */}
+        <div className="grid w-full items-center gap-1.5 box-border">
+          <Label htmlFor="salaryType" className="">
+            Votre option de salaire*
+          </Label>
+          <SelectOptions
+            options={salaryTypeData}
+            value={typeSalary}
+            onChange={(value) => setTypeSalary(value)}
+            label={"Votre option salaire"}
+            placeholder={"Choisir le type de salaire adapter a votre travail"}
+            loading={loading}
+            setLoading={setLoading}
+            required={true}
+          />
+        </div>
+
         {/* Paiment options */}
         <div className="grid w-full  items-center gap-1.5 box-border">
           <Label htmlFor="paimentOption" className="">
