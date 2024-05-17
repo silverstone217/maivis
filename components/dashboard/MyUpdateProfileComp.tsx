@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Suspense, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { IndexTabValue } from "./MainDashBoardComp";
 import { useSession } from "next-auth/react";
 import {
@@ -7,7 +7,6 @@ import {
   paimentOptionData,
   paimentMomentData,
 } from "@/utils/data";
-import SelectOptions from "../SelectOptions";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Input } from "../ui/input";
@@ -21,7 +20,6 @@ import {
   getDownloadURL,
   ref,
   uploadBytes,
-  uploadBytesResumable,
 } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
