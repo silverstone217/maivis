@@ -1,10 +1,41 @@
 import CategorySections from "@/components/home/CategorySections";
 import Hero from "@/components/home/Hero";
-import Image from "next/image";
+import PopularServices from "@/components/home/PopularServices";
+import { prisma } from "@/lib/prisma";
+import { User } from "next-auth";
 
-export default function Home() {
+export const getServices = async () => {
+  const services = await prisma.user.findMany({
+    where: {
+      jobber: {
+        NOT: undefined,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      image: true,
+      email: true,
+      createdAt: true,
+      updatedAt: true,
+      jobber: true,
+      role: true,
+      tel: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 8,
+  });
+
+  return services;
+};
+
+export default async function Home() {
+  const services = (await getServices()) as unknown as User[];
+
   return (
-    <main className="flex flex-col items-center justify-between p-5">
+    <main className="flex flex-col items-center justify-between p-3 lg:p-5">
       <div className="max-w-7xl mx-auto space-y-10 lg:space-y-16">
         <Hero />
         <div className=" space-y-4">
@@ -13,6 +44,8 @@ export default function Home() {
           </div>
           <CategorySections />
         </div>
+
+        {services.length > 0 && <PopularServices services={services} />}
 
         <p className="text-xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorum

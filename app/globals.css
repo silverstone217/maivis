@@ -57,3 +57,9 @@
     @apply bg-background text-foreground;
   }
 }
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=ee645a&c2=e86d4d&gt=l&gd=dcr
+*/
+background: #ee645a;
+background: linear-gradient(270deg, #ee645a, #e86d4d);

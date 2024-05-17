@@ -284,14 +284,17 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-8 justify-start mt-4 relative">
+    <div
+      className="w-full flex flex-col items-center gap-8 justify-start mt-4 relative 
+    transition-all duration-300 ease-in-out"
+    >
       {loading && <div className="w-full h-full absolute z-10 bg-overlay1" />}
       <h1 className="text-xl font-bold mt-4">Mon Resumé(CV)</h1>
 
       {/* Post, addres, salary and description */}
       <section
         className="flex flex-col  gap-4 items-start justify-start w-full 
-      lg:w-11/12 border-[0.5px] p-4 rounded shadow"
+      lg:w-11/12 border-[0.5px] p-4 rounded shadow transition-all duration-300 ease-in-out"
       >
         {/* job */}
         <div className="grid w-full  items-center gap-1.5 box-border flex-shrink-0">
@@ -387,7 +390,7 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
       {/* Paiment options */}
       <section
         className="flex flex-col  gap-4 items-start justify-start w-full 
-      lg:w-11/12 border-[0.5px] p-4 rounded shadow"
+      lg:w-11/12 border-[0.5px] p-4 rounded shadow transition-all duration-300 ease-in-out"
       >
         {/* Paiment options */}
         <div className="grid w-full  items-center gap-1.5 box-border">
@@ -486,12 +489,12 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
       {/* images */}
       <section
         className="flex flex-col  gap-4 items-start justify-start w-full 
-      lg:w-11/12 border-[0.5px] p-4 rounded shadow"
+      lg:w-11/12 border-[0.5px] p-4 rounded shadow transition-all duration-300 ease-in-out"
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 w-full gap-4">
           {/* add image */}
           {images.length < 4 && image === null ? (
-            <div className="grid w-full  items-center gap-1.5 box-border">
+            <div className="grid w-full  items-center gap-1.5 box-border transition-all duration-300 ease-in-out">
               <Input
                 type="file"
                 id="image"
@@ -510,7 +513,7 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
               />
             </div>
           ) : images.length < 4 && image ? (
-            <div className="grid w-full items-center gap-1.5 box-border">
+            <div className="grid w-full items-center gap-1.5 box-border transition-all duration-300 ease-in-out">
               <Image
                 src={URL.createObjectURL(image)}
                 alt="image"
@@ -531,7 +534,10 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
 
           {/* image */}
           {images.map((img, index) => (
-            <div key={index} className="w-full relative">
+            <div
+              key={index}
+              className="w-full relative transition-all duration-300 ease-in-out"
+            >
               <X
                 onClick={() => {
                   //   let imgs = images.filter((img1) => img1 !== img);
@@ -545,7 +551,8 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
                 <Image
                   src={img}
                   alt="image"
-                  className="w-full h-auto max-h-28 rounded object-cover brightness-90"
+                  className="w-full h-auto max-h-28 rounded object-cover brightness-90 
+                  transition-all duration-300 ease-in-out"
                   width={2000}
                   height={2000}
                   priority
@@ -559,7 +566,7 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
       {/* danger section */}
       <section
         className="flex flex-col  gap-4 items-start justify-start w-full 
-      lg:w-11/12 border-[0.5px] p-4 rounded shadow"
+      lg:w-11/12 border-[0.5px] p-4 rounded shadow transition-all duration-300 ease-in-out"
       >
         <h1 className="font-bold">Zone dangereuse</h1>
         <Button className="w-full" variant={"destructive"}>

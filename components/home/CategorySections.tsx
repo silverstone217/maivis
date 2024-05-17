@@ -13,37 +13,37 @@ const categories = [
     id: 1,
     title: "Femme de menage",
     icon: cleaning,
-    path: "/services/nettoyage",
+    path: "nettoyage",
   },
   {
     id: 2,
     title: "Plombier",
     icon: plumber,
-    path: "/services/plombier",
+    path: "plombier",
   },
   {
     id: 3,
     title: "Nourrice",
     icon: nanny,
-    path: "/services/nourrice",
+    path: "nourrice",
   },
   {
     id: 4,
     title: "Sentinelle",
     icon: sentinel,
-    path: "/services/sentinelle",
+    path: "sentinelle",
   },
   {
     id: 5,
     title: "Menusier",
     icon: wood,
-    path: "/services/menusier",
+    path: "menusier",
   },
   {
     id: 6,
     title: "Peintre",
     icon: painter,
-    path: "/services/peintre",
+    path: "peintre",
   },
 ];
 
@@ -53,7 +53,12 @@ const CategorySections = () => {
       {categories.map((cat) => (
         <Link
           key={cat.id}
-          href={cat.path}
+          href={{
+            pathname: "/services/",
+            query: {
+              job: cat.path,
+            },
+          }}
           className="flex flex-col items-center justify-center w-full text-balance gap-1 p-1
           md:px-3 group overflow-hidden dark:bg-primary text-black
           hover:cursor-pointer transition-all ease-in-out duration-300

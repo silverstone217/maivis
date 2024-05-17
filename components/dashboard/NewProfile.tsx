@@ -210,11 +210,13 @@ const NewProfile = () => {
   };
 
   return (
-    <main className={`grid place-items-center overflow-x-hidden relative`}>
+    <main
+      className={`grid place-items-center overflow-x-hidden relative transition-all duration-300 ease-in-out`}
+    >
       {loading && <div className="w-full h-full absolute z-10 bg-overlay1" />}
       <div
         className="flex items-start text-sm justify-center overflow-x-hidden
-       box-border gap-2 mx-auto bg-secondary my-4 p-2 rounded"
+       box-border gap-2 mx-auto bg-secondary my-4 p-2 rounded transition-all duration-300 ease-in-out"
       >
         <Info className="flex-shrink-0" />
         <p>
@@ -233,7 +235,7 @@ const NewProfile = () => {
           e.preventDefault();
           handleSubmit();
         }}
-        className="flex items-start flex-col gap-8 overflow-x-hidden box-border"
+        className="flex items-start flex-col gap-8 overflow-x-hidden box-border transition-all duration-300 ease-in-out"
       >
         {/* job */}
         <div className="grid w-full items-center gap-1.5 box-border">

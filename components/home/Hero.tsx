@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-2 md:h-[450px] mx-auto">
       {/* text and desc */}
-      <section className="w-full flex flex-col h-96 md:h-full items-start px-4 justify-evenly py-2 ">
+      <section className="w-full flex flex-col h-96 md:h-full items-start justify-evenly py-2 ">
         {/* title */}
         <div className="space-y-2">
           <h2 className=" text-[20px] lg:text-3xl font-black tracking-wide md:text-balance animate-fade-in">
