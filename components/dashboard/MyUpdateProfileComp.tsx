@@ -470,6 +470,7 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
             paimentMoment.replace(/ /g, "") === "" ||
             typeSalary.replace(/ /g, "") === "" ||
             paimentOption.replace(/ /g, "") === "" ||
+            transportFees.replace(/ /g, "") === "" ||
             (paimentMoment === myJob.paimentMoment &&
               typeSalary === myJob.typeSalary &&
               paimentOption === myJob.paimentOption &&
