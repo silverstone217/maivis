@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-2 md:h-[500px] mx-auto">
+    <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-2 md:gap-4 md:h-[500px] mx-auto">
       {/* text and desc */}
       <section className="w-full flex flex-col h-96 md:h-full items-start justify-evenly py-2 ">
         {/* title */}

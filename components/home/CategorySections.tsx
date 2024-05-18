@@ -50,7 +50,7 @@ const categories = [
 const CategorySections = () => {
   return (
     <div
-      className="grid grid-cols-3 w-11/12 md:w-4/5 md:grid-cols-6 mx-auto gap-6 md:gap-10 
+      className="grid grid-cols-3 w-11/12 2xl:w-4/5 lg:grid-cols-6 mx-auto gap-6 md:gap-10 
     min-h-96 lg:min-h-fit duration-300 transition-all ease-in-out"
     >
       {categories.map((cat) => (
@@ -62,8 +62,9 @@ const CategorySections = () => {
               job: cat.path,
             },
           }}
-          className="flex flex-col items-center justify-center w-full text-balance gap-1 p-1
-          md:px-3 group overflow-hidden dark:bg-primary text-black
+          className="flex flex-col items-center justify-center w-full text-balance gap-1 
+          py-1 px-2 rounded
+          md:px-6 group overflow-hidden dark:bg-primary text-black
           hover:cursor-pointer transition-all ease-in-out duration-300
           "
         >

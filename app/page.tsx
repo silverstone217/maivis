@@ -39,8 +39,8 @@ export default async function Home() {
       <div className="mt-12 md:mt-16" />
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-start gap-14 w-full">
         <Hero />
-        <div className=" space-y-4">
-          <div className="mx-auto w-4/5 text-center text-2xl font-bold">
+        <div className=" space-y-6">
+          <div className="mx-auto w-11/12 2xl:w-4/5 text-center text-2xl font-bold">
             <h2>Les categories populaires</h2>
           </div>
           <CategorySections />

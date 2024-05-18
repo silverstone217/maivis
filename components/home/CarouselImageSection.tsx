@@ -41,6 +41,7 @@ const CarouselImageSection = () => {
         {imageSlider.map((_, i) => (
           <div
             key={i}
+            onClick={() => setIndex(i)}
             className={
               index === i
                 ? "px-6 py-2 rounded-md bg-primary animate-fade-in transition-all ease-in-out duration-300"

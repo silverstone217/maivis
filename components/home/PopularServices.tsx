@@ -24,7 +24,7 @@ const PopularServices = ({ services }: Props) => {
         <h2 className="text-2xl font-bold text-center">
           Les personnels populaires
         </h2>
-        <div className="my-6 lg:my-4" />
+        <div className="my-6 " />
 
         <section
           className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 
