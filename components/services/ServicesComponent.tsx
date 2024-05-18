@@ -31,7 +31,7 @@ const ServicesComponent = ({ services }: Props) => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-between p-3 lg:p-5">
+    <div className="flex flex-col items-center justify-between p-3 lg:p-5 w-full">
       <div className="max-w-7xl mx-auto space-y-10 lg:space-y-16 w-full">
         {/* search header */}
         <SearchComponent

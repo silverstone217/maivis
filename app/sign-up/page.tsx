@@ -14,7 +14,7 @@ const page = async () => {
   }
 
   return (
-    <main className="w-dvw h-dvh overflow-hidden">
+    <main className="w-full h-full overflow-hidden">
       <div className="w-full max-w-7xl grid items-start lg:grid-cols-2 grid-cols-1 h-full mx-auto transition-all duration-300 ease-in-out">
         {/* greetings and images */}
 

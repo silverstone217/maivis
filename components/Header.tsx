@@ -40,11 +40,13 @@ const Header = () => {
     }
   }, []);
 
+  // console.log({ scrolling });
+
   if (pathName.includes("sign")) return null;
 
   return (
     <div
-      className={`w-full py-4 shadow-md fixed z-50 ${
+      className={`w-full py-4 shadow-md fixed z-50 top-0 left-0 ${
         scrolling ? "bg-secondary" : "bg-transparent"
       } transition-all duration-300 ease-in-out`}
     >

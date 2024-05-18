@@ -49,7 +49,10 @@ const categories = [
 
 const CategorySections = () => {
   return (
-    <div className="grid grid-cols-3 w-11/12 md:w-4/5 md:grid-cols-6 mx-auto gap-6 md:gap-10">
+    <div
+      className="grid grid-cols-3 w-11/12 md:w-4/5 md:grid-cols-6 mx-auto gap-6 md:gap-10 
+    min-h-96 lg:min-h-fit duration-300 transition-all ease-in-out"
+    >
       {categories.map((cat) => (
         <Link
           key={cat.id}

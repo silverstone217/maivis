@@ -9,8 +9,8 @@ type Props = {
 
 const PopularServices = ({ services }: Props) => {
   return (
-    <main className=" border-[0.5px] rounded px-2 lg:px-2 lg:py-4 py-2 box-border transition-all duration-300 ease-in-out">
-      <div className="w-full relative transition-all duration-300 ease-in-out">
+    <main className=" w-full border-[0.5px] rounded px-2 lg:px-2 lg:py-4 py-2 box-border transition-all duration-300 ease-in-out">
+      <div className="w-full relative min-h-96 lg:min-h-fit transition-all duration-300 ease-in-out">
         <div className="w-full flex items-center justify-end my-3 md:my-2">
           <Link
             href={"/services"}
@@ -26,7 +26,10 @@ const PopularServices = ({ services }: Props) => {
         </h2>
         <div className="my-6 lg:my-4" />
 
-        <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 box-border transition-all duration-300 ease-in-out">
+        <section
+          className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 
+        box-border transition-all duration-300 ease-in-out"
+        >
           {services.length > 0 &&
             services.map((service) => (
               <Suspense key={service.id}>

@@ -20,13 +20,14 @@ const ServiceItem = async ({ service }: Props) => {
   return (
     <Link
       href={user?.id === service.id ? "/dashboard" : `/services/${service.id}`}
-      className="flex flex-col items-start justify-center px-2 lg:px-2 lg:py-4 py-2 box-border gap-2 border shadow-md rounded-md"
+      className="flex flex-col items-start justify-center px-2 lg:px-2 lg:py-4 py-2 box-border 
+      gap-2 border shadow-md rounded-md duration-300 transition-all ease-in-out"
     >
-      <div className="flex items-start justify-start gap-2 box-border">
+      <div className="flex items-start justify-start gap-2 box-border duration-300 transition-all ease-in-out">
         {/* images */}
         <div
           className="size-12 overflow-hidden flex items-center justify-center bg-secondary 
-        rounded box-border"
+        rounded box-border duration-300 transition-all ease-in-out"
         >
           {jobber.images.length > 0 && (
             <Image
@@ -35,7 +36,7 @@ const ServiceItem = async ({ service }: Props) => {
               priority
               width={2000}
               height={2000}
-              className="size-full object-cover rounded"
+              className="size-full object-cover rounded duration-300 transition-all ease-in-out"
             />
           )}
         </div>

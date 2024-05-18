@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/components/providers/AuthProvider";
+import PaddingTopComponent from "@/components/PaddingTopComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,8 @@ export default function RootLayout({
           <AuthProvider>
             <div className="h-screen w-screen overflow-hidden relative">
               <Header />
-              <div className="pt-16 overflow-x-hidden overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
+              <div className="z-10 overflow-x-hidden overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
+                {/* <PaddingTopComponent /> */}
                 {children}
                 <Footer />
               </div>

@@ -35,8 +35,9 @@ export default async function Home() {
   const services = (await getServices()) as unknown as User[];
 
   return (
-    <main className="flex flex-col items-center justify-between p-3 lg:p-5">
-      <div className="max-w-7xl mx-auto space-y-10 lg:space-y-16">
+    <main className="flex flex-col items-center justify-between p-3 lg:p-5 w-full">
+      <div className="mt-12 md:mt-16" />
+      <div className="max-w-7xl mx-auto flex flex-col items-center justify-start gap-14 w-full">
         <Hero />
         <div className=" space-y-4">
           <div className="mx-auto w-4/5 text-center text-2xl font-bold">
@@ -47,7 +48,7 @@ export default async function Home() {
 
         {services.length > 0 && <PopularServices services={services} />}
 
-        <p className="text-xl">
+        <p className="text-xl duration-300 transition-all ease-in-out">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorum
           consectetur nostrum nobis quasi in eaque? Ipsum explicabo repudiandae
           soluta, sit, totam ea magni officia iste quos sint excepturi itaque.
