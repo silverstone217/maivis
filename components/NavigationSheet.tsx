@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -100,13 +100,26 @@ const NavigationSheet = () => {
   );
 };
 
+export const paths = ["/dashboard", "/profile"];
+
 const LogOutSugBtn = () => {
   const { toast } = useToast();
+  const pathName = usePathname();
+
+  const [isRedirected, setIsRedirected] = useState(false);
+
+  useEffect(() => {
+    if (paths.includes(pathName) && pathName !== "/") {
+      setIsRedirected(true);
+    } else {
+      setIsRedirected(false);
+    }
+  }, [isRedirected, pathName]);
 
   const handleLogout = async () => {
     try {
       await signOut({
-        redirect: false,
+        redirect: isRedirected,
         callbackUrl: "/",
       });
       toast({

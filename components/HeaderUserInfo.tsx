@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,19 +14,32 @@ import { changeName } from "@/utils/fonctions";
 import { User } from "next-auth";
 import { useToast } from "./ui/use-toast";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { paths } from "./NavigationSheet";
 
 const HeaderUserInfo = () => {
   const { data: session } = useSession();
   const user = session?.user;
   const { toast } = useToast();
 
+  const [isRedirected, setIsRedirected] = useState(false);
+  const pathName = usePathname();
+
+  useEffect(() => {
+    if (paths.includes(pathName) && pathName !== "/") {
+      setIsRedirected(true);
+    } else {
+      setIsRedirected(false);
+    }
+  }, [isRedirected, pathName]);
+
   if (!user) return null;
 
   const handleLogout = async () => {
     try {
       await signOut({
-        redirect: false,
-        callbackUrl: "/",
+        redirect: isRedirected,
+        callbackUrl: isRedirected ? "/sign-in" : "/",
       });
       toast({
         title: "Déconnexion",

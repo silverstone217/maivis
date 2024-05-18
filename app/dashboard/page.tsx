@@ -2,6 +2,7 @@ import MainDashBoardComp from "@/components/dashboard/MainDashBoardComp";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const getJob = async (id: string) => {
@@ -18,11 +19,11 @@ const page = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
   if (!user) {
-    return null;
+    redirect("/sign-in");
   }
   const id = user.id;
 
-  if (!id) return null;
+  if (!id) redirect("/sign-in");
 
   const myJob = await getJob(id);
 
