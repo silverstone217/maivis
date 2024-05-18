@@ -59,7 +59,9 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-  booking       Booking[] @relation("user")
+  bookings      Booking[] @relation("user")
+  raters        Rating[] @relation("rater")
+  ratings        Rating[] @relation("rated")
   jobber        Jobber?
 }
 
@@ -102,9 +104,25 @@ model Booking{
   paimentOption   String @default("mpesa")
   paimentMoment   String @default("before")
   status          String @default("en attente")
-  resavationDate  DateTime
+  reservationDate  DateTime
   userId          String
   user            User      @relation("user", fields: [userId], references: [id], onDelete: NoAction)
   jobberId        String
   jobber          Jobber      @relation("jobber", fields: [jobberId], references: [id], onDelete: NoAction)
+  ratings         Rating?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Rating {
+  id             String   @id @default(cuid())
+  rate           Int   @default(3)
+  raterId        String
+  ratedId        String
+  bookingId      String @unique
+  rater          User      @relation("rater", fields: [raterId], references: [id], onDelete: NoAction)
+  rated          User      @relation("rated", fields: [ratedId], references: [id], onDelete: NoAction)
+  booking        Booking   @relation(fields: [bookingId], references: [id], onDelete: NoAction)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
