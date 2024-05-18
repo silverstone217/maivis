@@ -2,7 +2,7 @@
 import { Links } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginSugBtn from "./forms/LoginSugBtn";
 import NavigationSheet from "./NavigationSheet";
 import SwitchThemeMode from "./SwitchThemeMode";
@@ -16,10 +16,38 @@ const Header = () => {
   const { data: session, status } = useSession();
   const user = session?.user;
 
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    // Get the element when the component has mounted
+    const scrollDiv = document.querySelector(".scroll-div");
+
+    // Continue the rest of the function only if the element exists
+    if (scrollDiv) {
+      const handleScroll = () => {
+        if (scrollDiv.scrollTop > 18) {
+          setScrolling(true);
+        } else {
+          setScrolling(false);
+        }
+      };
+
+      scrollDiv.addEventListener("scroll", handleScroll);
+
+      return () => {
+        scrollDiv.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, []);
+
   if (pathName.includes("sign")) return null;
 
   return (
-    <div className=" w-dvw py-4 shadow">
+    <div
+      className={`w-full py-4 shadow-md fixed z-50 ${
+        scrolling ? "bg-secondary" : "bg-transparent"
+      } transition-all duration-300 ease-in-out`}
+    >
       <div
         className="w-full max-w-7xl mx-auto px-4 2xl:px-0 flex items-center justify-between 
       transition-all duration-300 ease-in-out"

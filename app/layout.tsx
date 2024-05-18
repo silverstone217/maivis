@@ -34,10 +34,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <div>
+            <div className="h-screen w-screen overflow-hidden relative">
               <Header />
-              {children}
-              <Footer />
+              <div className="pt-16 overflow-x-hidden overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
+                {children}
+                <Footer />
+              </div>
               <Toaster />
             </div>
           </AuthProvider>
