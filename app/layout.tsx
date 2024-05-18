@@ -37,7 +37,7 @@ export default function RootLayout({
           <AuthProvider>
             <div className="h-screen w-screen overflow-hidden relative">
               <Header />
-              <div className="z-10 overflow-x-hidden overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
+              <div className="z-10 overflow-x-hidden scrollbar-hide overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
                 {/* <PaddingTopComponent /> */}
                 {children}
                 <Footer />
