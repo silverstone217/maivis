@@ -45,7 +45,7 @@ const ServicesComponent = ({ services }: Props) => {
         <div>
           <section className="text-xl font-bold w-full flex items-center  gap-1 py-2 border-b-[0.5px] transition-all duration-300 ease-in-out">
             <h2>Tous les services</h2>
-            <span>({services.length})</span>
+            <span>({services.filter((x) => x.jobber !== null).length})</span>
           </section>
 
           <div className="my-4" />
