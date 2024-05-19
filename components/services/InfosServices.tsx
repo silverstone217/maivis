@@ -22,7 +22,7 @@ const InfosServices = ({ service }: Props) => {
 
   return (
     <div
-      className="flex w-full flex-col gap-8 items-start justify-start
+      className="flex w-full flex-col gap-8 lg:gap-9 items-start justify-start
      transition-all duration-300 ease-in-out box-border"
     >
       {/* name and address */}

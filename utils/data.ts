@@ -85,6 +85,10 @@ export const paimentOptionData = [
     title: "Credit Card",
     value: "creditCard",
   },
+  {
+    title: "Tout type",
+    value: "all",
+  },
 ];
 
 export const paimentMomentData = [

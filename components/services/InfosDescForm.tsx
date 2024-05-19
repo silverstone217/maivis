@@ -22,13 +22,13 @@ const InfosDescForm = ({ service }: Props) => {
 
   return (
     <div
-      className="flex w-full flex-col gap-8 lg:gap-10 items-start justify-start 
+      className="flex w-full flex-col gap-8 items-start justify-start 
     transition-all duration-300 ease-in-out box-border"
     >
       {/* desc and options */}
       <div className="grid w-full grid-cols-1 gap-6 text-sm">
         {/* description */}
-        <p className="tex">{jobber.description}</p>
+        <p className="lg:h-20 line-clamp-4">{jobber.description}</p>
 
         {/* options */}
         <div className="w-full flex flex-col  gap-2 text-sm">

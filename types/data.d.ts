@@ -3,6 +3,7 @@ export enum paymentOptions {
   cash = "cash",
   paypal = "paypal",
   creditCard = "creditCard",
+  all = "all",
 }
 
 export enum paymentMoment {

@@ -40,16 +40,18 @@ export const changeMomentSalary = (type: string | undefined | null) => {
 };
 
 export const changeOptionPaiment = (type: string | undefined | null) => {
-  if (!type) return "cash";
+  if (!type) return "tout type";
 
   switch (type) {
     case "mobile":
       return "mobile(mpesa, orange, airtel)";
     case "paypal":
       return "paypal";
+    case "cash":
+      return "cash";
     case "creditCard":
       return "carte de credit";
     default:
-      return "cash";
+      return "tout type";
   }
 };
