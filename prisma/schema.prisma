@@ -61,7 +61,7 @@ model User {
   sessions      Session[]
   bookings      Booking[] @relation("user")
   raters        Rating[] @relation("rater")
-  ratings        Rating[] @relation("rated")
+  ratings       Rating[] @relation("rated")
   jobber        Jobber?
 }
 
@@ -104,7 +104,8 @@ model Booking{
   paimentOption   String @default("mpesa")
   paimentMoment   String @default("before")
   status          String @default("en attente")
-  reservationDate  DateTime
+  description     String 
+  reservationDate DateTime
   userId          String
   user            User      @relation("user", fields: [userId], references: [id], onDelete: NoAction)
   jobberId        String

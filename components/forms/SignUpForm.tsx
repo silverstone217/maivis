@@ -131,11 +131,11 @@ const SignUpForm = () => {
 
       {/* phone */}
       <div className="grid w-full max-w-xl items-center gap-1.5">
-        <Label htmlFor="email" className="">
+        <Label htmlFor="phone" className="">
           Téléphone
         </Label>
         <Input
-          type="text"
+          type="number"
           id="phone"
           placeholder="999888777"
           value={phone}

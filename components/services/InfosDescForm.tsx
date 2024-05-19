@@ -10,6 +10,7 @@ import { User } from "next-auth";
 import React from "react";
 import { Button } from "../ui/button";
 import { changeMomentSalary, changeOptionPaiment } from "@/utils/fonctions";
+import HireEmployee from "./HireEmployee";
 
 type Props = {
   service: User;
@@ -67,19 +68,7 @@ const InfosDescForm = ({ service }: Props) => {
             <span className="text-sm opacity-85"></span>
           </div>
         </Button>
-        <Button
-          className="box-border px-4 py-3 rounded shadow-sm border-[0.5px] flex gap-1
-         items-center justify-center"
-        >
-          <UserPlus className="size-5" />
-          <div className="flex flex-wrap box-border gap-1 ">
-            <span className="font-semibold capitalize line-clamp-1 text-center">
-              Engager
-            </span>
-            {/* <span>/</span> */}
-            <span className="text-sm opacity-85"></span>
-          </div>
-        </Button>
+        <HireEmployee service={service} />
       </section>
     </div>
   );
