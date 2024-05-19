@@ -5,7 +5,7 @@ import { getServerSession, User } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export const getService = async (id: string) => {
+const getService = async (id: string) => {
   const service = await prisma.user.findUnique({
     where: {
       jobber: {
