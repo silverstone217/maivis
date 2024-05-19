@@ -79,7 +79,7 @@ const ServiceItem = ({ service }: PropsService) => {
     <Link
       href={user?.id === service.id ? "/dashboard" : `/services/${service.id}`}
       className="flex flex-col items-start justify-center px-2 lg:px-2 lg:py-4 py-2 
-      box-border gap-2 border shadow-md rounded-md 
+      box-border gap-2 border-[1.5px] shadow-md rounded-md 
       transition-all duration-300 ease-in-out
       "
     >

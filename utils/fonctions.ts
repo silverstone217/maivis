@@ -5,3 +5,51 @@ export const changeName = (name: string | undefined | null) => {
   slicedName = slicedName.slice(0, 2);
   return slicedName.toUpperCase();
 };
+
+export const changeTypeSalary = (type: string | undefined | null) => {
+  if (!type) return "mensuel";
+
+  switch (type) {
+    case "monthly":
+      return "mensuel";
+    case "weekly":
+      return "hebdomadaire";
+    case "daily":
+      return "journalier";
+    case "by work":
+      return "par travail";
+    case "per hour":
+      return "par heure";
+
+    default:
+      return "mensuel";
+  }
+};
+
+export const changeMomentSalary = (type: string | undefined | null) => {
+  if (!type) return "apres travail";
+
+  switch (type) {
+    case "before":
+      return "avant travail";
+    case "after":
+      return "apres travail";
+    default:
+      return "a tout moment";
+  }
+};
+
+export const changeOptionPaiment = (type: string | undefined | null) => {
+  if (!type) return "cash";
+
+  switch (type) {
+    case "mobile":
+      return "mobile(mpesa, orange, airtel)";
+    case "paypal":
+      return "paypal";
+    case "creditCard":
+      return "carte de credit";
+    default:
+      return "cash";
+  }
+};

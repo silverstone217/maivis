@@ -21,7 +21,7 @@ const ServiceItem = async ({ service }: Props) => {
     <Link
       href={user?.id === service.id ? "/dashboard" : `/services/${service.id}`}
       className="flex flex-col items-start justify-center px-2 lg:px-2 lg:py-4 py-2 box-border 
-      gap-2 border shadow-md rounded-md duration-300 transition-all ease-in-out"
+      gap-2 border-[1.5px] shadow-md rounded-md duration-300 transition-all ease-in-out"
     >
       <div className="flex items-start justify-start gap-2 box-border duration-300 transition-all ease-in-out">
         {/* images */}

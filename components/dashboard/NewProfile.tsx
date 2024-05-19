@@ -137,6 +137,30 @@ const NewProfile = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
+
+      let intSalary = parseInt(salary);
+      let intTransportFees = parseInt(transportFees);
+
+      if (typeof intSalary !== "number") {
+        toast({
+          title: "Oh! Une erreur s'est produite!",
+          description: "Le salaire doit être un nombre.",
+          variant: "destructive",
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+
+      if (typeof intTransportFees !== "number") {
+        toast({
+          title: "Oh! Une erreur s'est produite!",
+          description: "Les frais de transport doivent être un nombre.",
+          variant: "destructive",
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+
       const urls = await handleUploadImagesCompany();
 
       if (!urls) {
@@ -152,12 +176,12 @@ const NewProfile = () => {
       const formData = {
         job,
         description,
-        salary,
+        salary: intSalary.toString(),
         address,
         images: urls,
         typeSalary,
         paimentOption,
-        transportFees,
+        transportFees: intTransportFees.toString(),
         paimentMoment,
         userId: user.id,
       };
