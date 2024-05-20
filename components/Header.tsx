@@ -52,7 +52,7 @@ const Header = () => {
     >
       <div
         className="w-full max-w-7xl mx-auto px-4 2xl:px-0 flex items-center justify-between 
-      transition-all duration-300 ease-in-out"
+      transition-all duration-300 ease-in-out z-50"
       >
         {/* logo and pages */}
         <div className="flex items-center gap-16">
