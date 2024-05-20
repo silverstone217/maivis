@@ -38,7 +38,7 @@ export default function RootLayout({
             <div className="h-screen w-screen overflow-hidden relative">
               <div className="z-10 overflow-x-hidden w-full flex flex-col items-center justify-between scrollbar-hide overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
                 {/* <PaddingTopComponent /> */}
-                <div className="w-full">{children}</div>
+                <div className="w-full flex-1">{children}</div>
                 <Footer />
               </div>
               <Header />
