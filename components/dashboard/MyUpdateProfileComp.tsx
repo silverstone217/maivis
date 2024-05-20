@@ -62,11 +62,24 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
   const handleSubmitPaiment = async () => {
     try {
       setLoading(true);
+
+      let intTransportFees = parseInt(transportFees);
+
+      if (typeof intTransportFees !== "number") {
+        toast({
+          title: "Oh! Une erreur s'est produite!",
+          description: "Les frais de transport doivent être un nombre.",
+          variant: "destructive",
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+
       const formData = {
         userId: user.id,
         paimentMoment,
         paimentOption,
-        transportFees,
+        transportFees: intTransportFees.toString(),
         typeSalary,
       };
 
@@ -113,10 +126,23 @@ const MyUpdateProfileComp = ({ myJob, setIndexTab }: Props) => {
   const handleSubmitJob = async () => {
     try {
       setLoading(true);
+
+      let intSalary = parseInt(salary);
+
+      if (typeof intSalary !== "number") {
+        toast({
+          title: "Oh! Une erreur s'est produite!",
+          description: "Le salaire doit être un nombre.",
+          variant: "destructive",
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+
       const formData = {
         job,
         description,
-        salary,
+        salary: intSalary.toString(),
         address,
         userId: user.id,
       };
