@@ -27,7 +27,7 @@ const ProfileComponent = async ({ myProfile }: Props) => {
   return (
     <div
       className="w-full min-h-[90vh] max-w-7xl flex flex-col items-center justify-start 
-    mx-auto p-2 gap-6 box-border transition-all duration-300 ease-in-out
+    mx-auto gap-6 box-border transition-all duration-300 ease-in-out
     "
     >
       <section>
