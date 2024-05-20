@@ -45,7 +45,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   const service = (await getService(id)) as unknown as User;
 
   return (
-    <div>
+    <div className="">
       <div className="mt-20" />
       <ViewItem service={service} />
     </div>

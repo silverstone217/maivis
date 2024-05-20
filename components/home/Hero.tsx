@@ -16,7 +16,12 @@ const Hero = () => {
           <h2 className="text-[20px] lg:text-2xl font-bold tracking-wide opacity-80 md:text-balance animate-fade-in">
             Des professionels ou services de maison
           </h2>
-          <h2 className="text-[20px] lg:text-2xl text-primary font-extrabold tracking-wide md:text-balance animate-fade-in">
+          <h2
+            className="text-[20px] lg:text-2xl 
+          font-extrabold tracking-wide md:text-balance animate-fade-in
+          bg-gradient-to-r from-green-800 via-green-700 to-green-500 inline-block text-transparent bg-clip-text
+          "
+          >
             Facilement sur MAIVIS.
           </h2>
         </div>
@@ -24,12 +29,17 @@ const Hero = () => {
         <div className="text-xs lg:text-sm opacity-80 animate-fade-in">
           <p>
             Des centaines de personne ont deja choisi{" "}
-            <strong className="text-primary">Maivis</strong> pour leur service
-            de maisons.
+            <strong className="bg-gradient-to-r from-green-700 via-green-600 to-green-400 inline-block text-transparent bg-clip-text ">
+              Maivis
+            </strong>{" "}
+            pour leur service de maisons.
           </p>
           <p>
-            <strong className="text-primary">Maivis</strong> gere des femmes de
-            menages, des plombiers, nourices, sentinelles et plus encores.
+            <strong className="bg-gradient-to-r from-green-700 via-green-600 to-green-400 inline-block text-transparent bg-clip-text">
+              Maivis
+            </strong>{" "}
+            gere des femmes de menages, des plombiers, nourices, sentinelles et
+            plus encores.
           </p>
         </div>
         {/* btn get started */}

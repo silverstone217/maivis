@@ -9,7 +9,10 @@ type Props = {
 
 const ViewItem = ({ service }: Props) => {
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-4 transition-all duration-300 ease-in-out">
+    <div
+      className="w-full max-w-7xl mx-auto space-y-4 transition-all 
+    duration-300 ease-in-out min-h-[90vh]"
+    >
       <div className="w-full h-60 lg:h-[280px] transition-all duration-300 ease-in-out box-border">
         <ImagesProfilePreview service={service} />
       </div>

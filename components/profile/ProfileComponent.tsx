@@ -25,7 +25,11 @@ const ProfileComponent = async ({ myProfile }: Props) => {
   //   console.log("image", user);
 
   return (
-    <div className="w-full max-w-7xl flex flex-col items-center justify-start mx-auto p-2 gap-6 box-border">
+    <div
+      className="w-full min-h-[90vh] max-w-7xl flex flex-col items-center justify-start 
+    mx-auto p-2 gap-6 box-border transition-all duration-300 ease-in-out
+    "
+    >
       <section>
         <h1 className="text-xl font-bold tracking-wide">Mon profile</h1>
       </section>

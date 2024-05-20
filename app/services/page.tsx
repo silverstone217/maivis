@@ -7,7 +7,7 @@ const Services = async () => {
   const services = (await getServices()) as unknown as User[];
 
   return (
-    <div>
+    <div className="min-h-[90vh]">
       <div className="mt-16" />
       <ServicesComponent services={services} />
     </div>

@@ -14,7 +14,7 @@ type Props = {
 const MainDashBoardComp = ({ myJob }: Props) => {
   const [indexTab, setIndexTab] = useState<IndexTabValue>("dashboard");
   return (
-    <Tabs value={indexTab} className="w-full">
+    <Tabs value={indexTab} className="w-full min-h-[90vh]">
       <TabsList className="w-full gap-2">
         <TabsTrigger value="dashboard" onClick={() => setIndexTab("dashboard")}>
           Dashboard
