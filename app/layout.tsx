@@ -36,12 +36,12 @@ export default function RootLayout({
         >
           <AuthProvider>
             <div className="h-screen w-screen overflow-hidden relative">
-              <Header />
               <div className="z-10 overflow-x-hidden w-full flex flex-col items-center justify-between scrollbar-hide overflow-y-auto h-[calc(100dvh)] scroll-smooth scroll-div">
                 {/* <PaddingTopComponent /> */}
                 <div className="w-full">{children}</div>
                 <Footer />
               </div>
+              <Header />
               <Toaster />
             </div>
           </AuthProvider>
