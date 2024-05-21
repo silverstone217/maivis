@@ -29,6 +29,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
   useEffect(() => {
     const getMyData = async () => {
       try {
+        console.log("infinite loading");
         const jobberId = user?.id;
         if (!jobberId) return;
         setLoading(true);
@@ -63,7 +64,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     getMyData();
   }, [user?.id]);
 
-  //   const reservationsData = useMemo(() => reservations, [reservations]);
+  const reservationsData = useMemo(() => reservations, [reservations]);
 
   if (!user) return null;
 
@@ -71,7 +72,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     return <div className="p-2 text-center font-semibold">chargement...</div>;
   }
 
-  if (!reservations && !loading) {
+  if (!reservationsData && !loading) {
     return (
       <div className="p-2 text-center font-semibold text-xl">
         <h2>Aucune activité trouvée</h2>
@@ -81,12 +82,12 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
 
   return (
     <>
-      <span>
-        reservations : {reservations.length} --- {reservations.length}
+      <span className="mt-4 text-sm">
+        Reservations : <strong>{reservationsData.length}</strong>
       </span>
-      <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-5">
-        {reservations.length > 0 &&
-          reservations.map((reservation) => (
+      <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+        {reservationsData.length > 0 &&
+          reservationsData.map((reservation) => (
             <ReservationItem
               reservation={reservation}
               key={reservation.id}
