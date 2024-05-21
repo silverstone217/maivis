@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Jobber } from "@prisma/client";
 import DashboardComponent from "./DashboardComponent";
 import MyInfosComponent from "./MyInfosComponent";
+import ActivitiesComponent from "./ActivitiesComponent";
 
 export type IndexTabValue = "dashboard" | "infos" | "activity";
 
@@ -13,6 +14,7 @@ type Props = {
 
 const MainDashBoardComp = ({ myJob }: Props) => {
   const [indexTab, setIndexTab] = useState<IndexTabValue>("dashboard");
+
   return (
     <Tabs value={indexTab} className="w-full min-h-[90vh]">
       <TabsList className="w-full gap-2">
@@ -39,10 +41,7 @@ const MainDashBoardComp = ({ myJob }: Props) => {
 
       {/* activities */}
       <TabsContent value="activity">
-        <div>
-          <p>Change your activity here.</p>
-          <span onClick={() => setIndexTab("infos")}>Retour</span>
-        </div>
+        <ActivitiesComponent setIndexTab={setIndexTab} />
       </TabsContent>
     </Tabs>
   );

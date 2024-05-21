@@ -7,6 +7,7 @@ export type User = {
   tel: string;
   image: string | null;
   jobber?: Jobber | null;
+  bookings?: Jobber | null;
   emailVerified: Date | null;
   createdAt: Date;
   updatedAt: Date;
@@ -22,6 +23,7 @@ declare module "next-auth" {
     image: string | null;
     tel: string;
     jobber?: Jobber | null;
+    bookings?: Jobber | null;
     emailVerified: Date | null;
     createdAt: Date;
     updatedAt: Date;

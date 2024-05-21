@@ -106,6 +106,7 @@ model Booking{
   status          String @default("en attente")
   description     String 
   reservationDate DateTime
+  isViewed        Boolean @default(false)
   userId          String
   user            User      @relation("user", fields: [userId], references: [id], onDelete: NoAction)
   jobberId        String

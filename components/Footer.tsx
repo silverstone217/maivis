@@ -52,7 +52,7 @@ const Footer = () => {
 
         <section
           className="w-full grid capitalize grid-cols-2 md:grid-cols-3 
-        lg:grid-cols-4 items-start justify-start gap-4 place-items-center
+        lg:grid-cols-4 items-start justify-start gap-4  lg:place-items-center
         transition-all duration-300 ease-in-out"
         >
           <div>
