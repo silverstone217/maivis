@@ -9,8 +9,6 @@ export async function GET(req: Request) {
     const session = await getServerSession(authOptions);
     const authenticated = !!session;
 
-    console.log({ authenticated, session, src: "server retrieve" });
-
     if (!authenticated) {
       return NextResponse.json(
         { error: true, message: "Not authorized!" },
@@ -53,10 +51,6 @@ export async function GET(req: Request) {
       orderBy: {
         createdAt: "desc",
       },
-    });
-    console.log({
-      reservations: reservations.length,
-      src: "data on server retrieve data",
     });
 
     return NextResponse.json({
