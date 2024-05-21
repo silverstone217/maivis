@@ -29,7 +29,6 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
   useEffect(() => {
     const getMyData = async () => {
       try {
-        console.log("infinite loading");
         const jobberId = user?.id;
         if (!jobberId) return;
         setLoading(true);
@@ -61,9 +60,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
       }
     };
 
-    return () => {
-      getMyData();
-    };
+    getMyData();
   }, [user?.id]);
 
   //   const reservationsData = useMemo(() => reservations, [reservations]);
