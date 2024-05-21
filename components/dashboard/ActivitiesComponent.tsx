@@ -59,6 +59,8 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
           return;
         }
 
+        console.log({ res: data.data });
+
         setReservations(data.data);
         setLoading(false);
       } catch (error) {
