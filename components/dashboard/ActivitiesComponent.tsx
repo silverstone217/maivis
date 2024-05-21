@@ -34,7 +34,6 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     null
   );
   const [loading, setLoading] = useState(false);
-  const tokens = session?.expires;
 
   useEffect(() => {
     const getMyData = async () => {
@@ -76,7 +75,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
 
   const reservationsData = useMemo(() => reservations, [reservations]);
 
-  if (!user) return null;
+  //   if (!user) return null;
 
   if (loading) {
     return <div className="p-2 text-center font-semibold">chargement...</div>;
@@ -92,6 +91,9 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
 
   return (
     <>
+      <span>
+        reservations : {reservationsData.length} --- {reservations.length}
+      </span>
       <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-5">
         {reservationsData.length > 0 &&
           reservationsData.map((reservation) => (
