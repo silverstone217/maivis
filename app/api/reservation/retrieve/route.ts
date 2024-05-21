@@ -54,6 +54,11 @@ export async function GET(req: Request) {
         createdAt: "desc",
       },
     });
+    console.log({
+      reservations: reservations.length,
+      src: "data on server retrieve data",
+    });
+
     return NextResponse.json({
       error: false,
       data: reservations,
