@@ -7,15 +7,6 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Check, X } from "lucide-react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
 type Props = {
   setIndexTab: React.Dispatch<React.SetStateAction<IndexTabValue>>;
 };
@@ -75,7 +66,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     };
   }, [user?.id]);
 
-  const reservationsData = useMemo(() => reservations, [reservations]);
+  //   const reservationsData = useMemo(() => reservations, [reservations]);
 
   if (!user) return null;
 
@@ -83,7 +74,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     return <div className="p-2 text-center font-semibold">chargement...</div>;
   }
 
-  if (!reservationsData && !loading) {
+  if (!reservations && !loading) {
     return (
       <div className="p-2 text-center font-semibold text-xl">
         <h2>Aucune activité trouvée</h2>
@@ -94,11 +85,11 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
   return (
     <>
       <span>
-        reservations : {reservationsData.length} --- {reservations.length}
+        reservations : {reservations.length} --- {reservations.length}
       </span>
       <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-5">
-        {reservationsData.length > 0 &&
-          reservationsData.map((reservation) => (
+        {reservations.length > 0 &&
+          reservations.map((reservation) => (
             <ReservationItem
               reservation={reservation}
               key={reservation.id}
