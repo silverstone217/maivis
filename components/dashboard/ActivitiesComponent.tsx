@@ -75,7 +75,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
 
   const reservationsData = useMemo(() => reservations, [reservations]);
 
-  //   if (!user) return null;
+  if (!user) return null;
 
   if (loading) {
     return <div className="p-2 text-center font-semibold">chargement...</div>;
