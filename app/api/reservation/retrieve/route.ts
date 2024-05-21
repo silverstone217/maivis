@@ -52,6 +52,7 @@ export async function GET(req: Request) {
         createdAt: "desc",
       },
     });
+    console.log("reservation", reservations[0]);
     return NextResponse.json({
       error: false,
       data: reservations,

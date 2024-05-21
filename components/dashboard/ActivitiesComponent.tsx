@@ -79,14 +79,12 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
   if (!user) return null;
 
   if (loading) {
-    return (
-      <div className="p-2 text-center font-semibold text-sm">chargement...</div>
-    );
+    return <div className="p-2 text-center font-semibold">chargement...</div>;
   }
 
-  if (!reservationsData) {
+  if (!reservationsData && !loading) {
     return (
-      <div className="p-2 text-center font-semibold">
+      <div className="p-2 text-center font-semibold text-xl">
         <h2>Aucune activité trouvée</h2>
       </div>
     );
