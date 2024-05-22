@@ -75,7 +75,14 @@ const HeaderUserInfo = () => {
             Profile
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
+        {user && (
+          <DropdownMenuItem asChild>
+            <Link href={"/reservations"} className="cursor-pointer ">
+              Reservations
+            </Link>
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuItem asChild disabled>
           <Link href={"/notifications"} className="cursor-pointer ">
             Notifications
           </Link>

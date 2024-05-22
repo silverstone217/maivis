@@ -116,6 +116,33 @@ export const bookingStatusData = [
     value: "termine",
   },
   {
+    title: "En cours",
+    value: "en cours",
+  },
+  {
+    title: "Accepté",
+    value: "accepte",
+  },
+  {
+    title: "Refusé",
+    value: "refuse",
+  },
+];
+
+export const bookingStatusDataClient = [
+  {
+    title: "En attente",
+    value: "en attente",
+  },
+  {
+    title: "En cours",
+    value: "en cours",
+  },
+  {
+    title: "Terminé",
+    value: "termine",
+  },
+  {
     title: "Accepté",
     value: "accepte",
   },

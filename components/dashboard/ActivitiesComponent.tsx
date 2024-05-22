@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { IndexTabValue } from "./MainDashBoardComp";
 import { User, Booking as PrismaBooking, Jobber } from "@prisma/client";
-import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Check, X } from "lucide-react";
@@ -10,7 +9,6 @@ import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import SelectOptions from "../SelectOptions";
 import { bookingStatusData } from "@/utils/data";
-import SelectUpdateOptions from "../SelectUpdateOptions";
 
 type Props = {
   setIndexTab: React.Dispatch<React.SetStateAction<IndexTabValue>>;
@@ -447,7 +445,7 @@ const ReservationItem = ({
   );
 };
 
-const StatusRenderComponent = ({
+export const StatusRenderComponent = ({
   status,
 }: {
   status: string | undefined | null;
