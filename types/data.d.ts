@@ -22,4 +22,5 @@ export type statusOptions =
   | "accepte"
   | "refuse"
   | "reporte"
+  | "termine"
   | "";

@@ -105,3 +105,22 @@ export const paimentMomentData = [
     value: "all",
   },
 ];
+
+export const bookingStatusData = [
+  // {
+  //   title: "Reporté",
+  //   value: "reporte",
+  // },
+  {
+    title: "Terminé",
+    value: "termine",
+  },
+  {
+    title: "Accepté",
+    value: "accepte",
+  },
+  {
+    title: "Refusé",
+    value: "refuse",
+  },
+];

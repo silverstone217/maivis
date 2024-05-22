@@ -6,6 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Check, X } from "lucide-react";
+import { useToast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
+import SelectOptions from "../SelectOptions";
+import { bookingStatusData } from "@/utils/data";
+import SelectUpdateOptions from "../SelectUpdateOptions";
 
 type Props = {
   setIndexTab: React.Dispatch<React.SetStateAction<IndexTabValue>>;
@@ -24,12 +29,15 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
   const [reservationData, setReservationData] = useState<BookingType | null>(
     null
   );
+
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const getMyData = async () => {
       try {
-        console.log("infinite loading");
+        // console.log("infinite loading");
         const jobberId = user?.id;
         if (!jobberId) return;
         setLoading(true);
@@ -50,7 +58,7 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
           return;
         }
 
-        console.log({ res: data.data });
+        // console.log({ res: data.data });
 
         setReservations(data.data);
         setLoading(false);
@@ -80,6 +88,59 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
     );
   }
 
+  // handle submit
+  const handleSubmitStatus = async (
+    status: string,
+    bookingId: string,
+    jobberId: string
+  ) => {
+    try {
+      setLoading(true);
+      const formData = {
+        status: status,
+        bookingId,
+        userId: user.id,
+        jobberId,
+      };
+
+      const response = await fetch("/api/reservation/status", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.error === true) {
+        toast({
+          description: data.message,
+          variant: "destructive",
+          duration: 2000,
+        });
+        setTimeout(() => setLoading(false), 1500);
+        return;
+      }
+
+      toast({
+        description: data.message,
+        variant: "default",
+        duration: 2000,
+      });
+      setTimeout(() => setLoading(false), 1500);
+      router.refresh();
+    } catch (error) {
+      const err = error as Error;
+      toast({
+        description: err.message,
+        variant: "destructive",
+        duration: 2000,
+      });
+      setTimeout(() => setLoading(false), 1500);
+    }
+  };
+
   return (
     <>
       <span className="mt-4 text-sm">
@@ -92,12 +153,16 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
               reservation={reservation}
               key={reservation.id}
               setReservationData={setReservationData}
+              handleSubmitStatus={handleSubmitStatus}
             />
           ))}
       </div>
       <ViewReservationItem
         reservationData={reservationData}
         setReservationData={setReservationData}
+        handleSubmitStatus={handleSubmitStatus}
+        loading={loading}
+        setLoading={setLoading}
       />
     </>
   );
@@ -106,17 +171,33 @@ const ActivitiesComponent = ({ setIndexTab }: Props) => {
 type PropsActivity = {
   reservation: BookingType;
   setReservationData: React.Dispatch<React.SetStateAction<BookingType | null>>;
+  handleSubmitStatus: (
+    status: string,
+    bookingId: string,
+    jobberId: string
+  ) => Promise<void>;
 };
 
 type PropsActivityPopup = {
   reservationData: BookingType | null;
+  loading: boolean;
   setReservationData: React.Dispatch<React.SetStateAction<BookingType | null>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmitStatus: (
+    status: string,
+    bookingId: string,
+    jobberId: string
+  ) => Promise<void>;
 };
 
 const ViewReservationItem = ({
   reservationData,
   setReservationData,
+  handleSubmitStatus,
+  loading,
+  setLoading,
 }: PropsActivityPopup) => {
+  const [status, setStatus] = useState(reservationData?.status || "");
   if (!reservationData) return null;
 
   return (
@@ -164,13 +245,58 @@ const ViewReservationItem = ({
               </div>
             </div>
 
-            <div className="text-xs flex flex-col items-start gap-1 capitalize">
-              <p>
-                Status :{" "}
-                <strong>
-                  <StatusRenderComponent status={reservationData.status} />
-                </strong>
-              </p>
+            <div className="text-xs flex flex-col items-start gap-4 capitalize">
+              {reservationData.status !== "accepte" && (
+                <p>
+                  Status :{" "}
+                  <strong>
+                    <StatusRenderComponent status={reservationData.status} />
+                  </strong>
+                </p>
+              )}
+
+              {reservationData.status === "accepte" && (
+                <div className="flex flex-col items-start gap-1 w-full">
+                  <p>
+                    Status :{" "}
+                    <strong>
+                      <StatusRenderComponent status={reservationData.status} />
+                    </strong>
+                  </p>
+                  <div className="w-full flex  gap-2 items-center justify-start">
+                    <SelectOptions
+                      options={bookingStatusData}
+                      onChange={(e) => setStatus(e)}
+                      value={status}
+                      required
+                      label="Status"
+                      placeholder="Modifier l'etat de la reservation"
+                      loading={loading}
+                      setLoading={setLoading}
+                    />
+                    <Button
+                      onClick={() => {
+                        handleSubmitStatus(
+                          status,
+                          reservationData.id,
+                          reservationData.jobberId
+                        );
+                        setReservationData(null);
+                      }}
+                      variant={"outline"}
+                      disabled={
+                        loading ||
+                        reservationData.status === status ||
+                        status === ""
+                      }
+                      className="px-2 py-1"
+                    >
+                      modifier
+                    </Button>
+                  </div>
+                </div>
+              )}
+
               <p>{reservationData.description}</p>
             </div>
 
@@ -191,10 +317,31 @@ const ViewReservationItem = ({
                   className="flex flex-1 items-center justify-end gap-2 box-border
                  transition-all duration-300 ease-in-out"
                 >
-                  <Button variant={"destructive"} className="py-1 px-3">
+                  <Button
+                    variant={"destructive"}
+                    onClick={() => {
+                      handleSubmitStatus(
+                        "refuse",
+                        reservationData.id,
+                        reservationData.jobberId
+                      );
+                      setReservationData(null);
+                    }}
+                    className="py-1 px-3"
+                  >
                     <X className="size-5" />
                   </Button>
-                  <Button className="py-1 px-3">
+                  <Button
+                    className="py-1 px-3"
+                    onClick={() => {
+                      handleSubmitStatus(
+                        "accepte",
+                        reservationData.id,
+                        reservationData.jobberId
+                      );
+                      setReservationData(null);
+                    }}
+                  >
                     <Check className="size-5" />
                   </Button>
                 </div>
@@ -214,6 +361,7 @@ const ViewReservationItem = ({
 const ReservationItem = ({
   reservation,
   setReservationData,
+  handleSubmitStatus,
 }: PropsActivity) => {
   return (
     <div
@@ -248,7 +396,12 @@ const ReservationItem = ({
           </div>
         </div>
         {/* accept */}
-        <div className="flex w-full items-end justify-between gap-2 box-border">
+        <div
+          onClick={(e) => {
+            reservation.status === "en attente" && e.stopPropagation();
+          }}
+          className="flex w-full items-end justify-between gap-2 box-border"
+        >
           <span className="text-xs opacity-70">
             {new Date(reservation.reservationDate).toLocaleDateString("Fr-fr", {
               year: "numeric",
@@ -257,11 +410,33 @@ const ReservationItem = ({
             })}
           </span>
           {reservation.status === "en attente" && (
-            <div className="flex flex-1 items-center justify-end gap-2 box-border transition-all duration-300 ease-in-out">
-              <Button variant={"destructive"} className="py-1 px-3">
+            <div
+              className="flex flex-1 items-center justify-end gap-2 box-border transition-all 
+            duration-300 ease-in-out"
+            >
+              <Button
+                variant={"destructive"}
+                className="py-1 px-3"
+                onClick={() =>
+                  handleSubmitStatus(
+                    "refuse",
+                    reservation.id,
+                    reservation.jobberId
+                  )
+                }
+              >
                 <X className="size-5" />
               </Button>
-              <Button className="py-1 px-3">
+              <Button
+                className="py-1 px-3"
+                onClick={() =>
+                  handleSubmitStatus(
+                    "accepte",
+                    reservation.id,
+                    reservation.jobberId
+                  )
+                }
+              >
                 <Check className="size-5" />
               </Button>
             </div>
@@ -292,7 +467,7 @@ const StatusRenderComponent = ({
       );
     case "annule":
       return (
-        <span className="text-xs opacity-80 font-medium text-red-800 transition-all duration-300 ease-in-out">
+        <span className="text-xs opacity-80 font-medium text-gray-700 transition-all duration-300 ease-in-out">
           {status}
         </span>
       );
@@ -305,6 +480,12 @@ const StatusRenderComponent = ({
     case "refuse":
       return (
         <span className="text-xs opacity-80 font-medium text-red-800 transition-all duration-300 ease-in-out">
+          {status}
+        </span>
+      );
+    case "termine":
+      return (
+        <span className="text-xs opacity-80 font-medium text-green-700 transition-all duration-300 ease-in-out">
           {status}
         </span>
       );

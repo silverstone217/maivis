@@ -6,16 +6,7 @@ export async function POST(req: Request) {
   try {
     const job = body;
     console.log(job, "job");
-    const requiredFields = [
-      "job",
-      "userId",
-      "typeSalary",
-      "description",
-      "images",
-      "salary",
-      "address",
-      "paimentOption",
-    ];
+    const requiredFields = ["userId", "jobberId", "bookingId", "status"];
     const missingFields = requiredFields.filter((field) => !(field in job));
 
     if (!job.userId) {
@@ -50,48 +41,62 @@ export async function POST(req: Request) {
 
     const jobExists = await prisma.jobber.findUnique({
       where: {
-        userId: job.userId,
+        id: job.jobberId,
       },
     });
 
-    if (jobExists) {
+    if (!jobExists || !jobExists.isAvailable) {
       return NextResponse.json(
         {
           error: true,
-          message: "Vous avez déjà posté une offre!",
+          message: "Ce personnel n'est plus disponible. reesayez plus tard!",
         },
         { status: 400 }
       );
     }
 
-    const newJob = await prisma.jobber.create({
-      data: {
-        job: job.job,
-        userId: job.userId,
-        typeSalary: job.typeSalary,
-        description: job.description,
-        images: job.images,
-        salary: job.salary,
-        address: job.address,
-        paimentOption: job.paimentOption,
-        transportFees: job.transportFees,
-        paimentMoment: job.paimentMoment,
+    const bookingExists = await prisma.booking.findUnique({
+      where: {
+        id: job.bookingId,
       },
     });
 
-    const updateUser = await prisma.user.update({
+    if (!bookingExists) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Cette réservation n'existe pas!",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (
+      bookingExists.jobberId !== job.jobberId &&
+      bookingExists.userId !== job.userId
+    ) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Vous n'avez pas le droit de modifier cette réservation!",
+        },
+        { status: 400 }
+      );
+    }
+
+    const updateBooking = await prisma.booking.update({
       where: {
-        id: job.userId,
+        id: job.bookingId,
       },
       data: {
-        role: "jobber",
+        status: job.status,
       },
     });
 
     return NextResponse.json({
       error: false,
-      message: "Votre profile est maintenant crée!",
-      data: newJob,
+      message: "Le status de la réservation a été modifé!",
+      data: updateBooking,
     });
   } catch (error) {
     const err = error as Error;

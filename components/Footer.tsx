@@ -98,7 +98,8 @@ const Footer = () => {
 
         <section className="text-center w-full text-sm transition-all duration-300 ease-in-out">
           <p className="space-x-2">
-            <span>@2024</span>
+            <span>&copy; 2024</span>
+            <span>All right reserved</span>
             <strong
               className="bg-gradient-to-r from-green-700 via-green-600 
               to-green-400 inline-block text-transparent bg-clip-text "
