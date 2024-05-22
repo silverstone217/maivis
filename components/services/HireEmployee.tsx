@@ -214,13 +214,14 @@ const HireEmployee = ({ service }: Props) => {
 
         <AlertDialogFooter>
           <AlertDialogCancel asChild>
-            <Button type="button" disabled={loading}>
+            <Button variant={"outline"} type="button" disabled={loading}>
               Annuler
             </Button>
           </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
               type="button"
+              variant={"default"}
               onClick={(e) => {
                 e.preventDefault();
                 handleSubmit();
