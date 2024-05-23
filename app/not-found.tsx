@@ -4,8 +4,8 @@ import React from "react";
 
 const NotFound = () => {
   return (
-    <main className="w-full max-w-7xl items-center justify-center gap-4 flex flex-col pt-20">
-      <div className="mt-10" />
+    <main className="w-full min-h-[85vh] mx-auto max-w-7xl items-center justify-start gap-4 flex flex-col pt-20">
+      <div className="mt-16" />
       <div className=" flex items-start gap-2 justify-center text-8xl font-extrabold tracking-wide text-primary">
         <span>4</span>
         <span className="mt-5">0</span>

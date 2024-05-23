@@ -17,10 +17,10 @@ const Footer = () => {
   if (pathName.includes("sign")) return null;
 
   return (
-    <footer className="w-full">
+    <footer className="w-full bg-secondary">
       <div
         className="w-full mx-auto max-w-7xl min-h-[85vh] md:min-h-[60vh]
-        bg-secondary pb-2 pt-6 px-4 flex flex-col gap-6 md:gap-10 items-start justify-between 
+         pb-2 pt-6 px-4 flex flex-col gap-6 md:gap-10 items-start justify-between 
         transition-all duration-300 ease-in-out
         "
       >
