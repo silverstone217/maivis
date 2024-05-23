@@ -9,13 +9,14 @@ export async function POST(req: Request) {
     const job = body;
     console.log(job, "job");
     const requiredFields = [
-      "fees",
       "userId",
       "jobberId",
       "description",
       "address",
       "reservationDate",
+      "bookingId",
     ];
+    const missingFields = requiredFields.filter((field) => !(field in job));
 
     const session = await getServerSession(authOptions);
     const user = session?.user;
@@ -25,8 +26,6 @@ export async function POST(req: Request) {
         { status: 403 }
       );
     }
-
-    const missingFields = requiredFields.filter((field) => !(field in job));
 
     if (!job.userId) {
       return NextResponse.json(
@@ -74,11 +73,42 @@ export async function POST(req: Request) {
       );
     }
 
-    const newReservation = await prisma.booking.create({
+    const bookingExists = await prisma.booking.findUnique({
+      where: {
+        id: job.bookingId,
+      },
+    });
+
+    if (!bookingExists) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Cette réservation n'existe pas!",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (
+      bookingExists.status === "annule" ||
+      bookingExists.status === "refuse" ||
+      bookingExists.status === "termine"
+    ) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Cette réservation n'est plus etre modifiée!",
+        },
+        { status: 400 }
+      );
+    }
+
+    const updateReservation = await prisma.booking.update({
+      where: {
+        id: job.bookingId,
+      },
+
       data: {
-        fees: job.fees,
-        userId: job.userId,
-        jobberId: job.jobberId,
         description: job.description,
         address: job.address,
         reservationDate: job.reservationDate,
@@ -87,8 +117,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       error: false,
-      message: "Votre offre a été envoye!",
-      data: newReservation,
+      message: "Votre offre a été modifié!",
+      data: updateReservation,
     });
   } catch (error) {
     const err = error as Error;
