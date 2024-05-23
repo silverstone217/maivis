@@ -64,6 +64,8 @@ const ViewReservationComponent = ({ reservation }: Props) => {
           jobber={jobber}
           reservation={reservation}
         />
+        {/* rating */}
+        <StatusSection reservation={reservation} />
       </div>
     </div>
   );
@@ -199,6 +201,10 @@ const FormAdditionInfoSection = ({
     reservation && reservation.reservationDate
       ? new Date(reservation.reservationDate).toDateString()
       : ""
+  );
+
+  const [canModify, setCanModify] = useState(
+    reservation.status === "accepte" || reservation.status === "en attente"
   );
 
   if (!user) {
@@ -345,14 +351,13 @@ const FormAdditionInfoSection = ({
                   )
                 : ""}
             </p>
-            {reservation.status === "accepte" ||
-              (reservation.status === "en attente" && (
-                <span className="text-[11px] line-clamp-1">
-                  <strong> ps: </strong>
+            {canModify && (
+              <span className="text-[11px] line-clamp-1">
+                <strong> ps: </strong>
 
-                  {"uniquement la date et non l'heure ne peut etre changé."}
-                </span>
-              ))}
+                {"uniquement la date et non l'heure ne peut etre changé."}
+              </span>
+            )}
           </div>
           <Input
             id="date"
@@ -368,24 +373,43 @@ const FormAdditionInfoSection = ({
         </div>
         {/* submit */}
 
-        {reservation.status === "accepte" ||
-          (reservation.status === "en attente" && (
-            <Button
-              type="submit"
-              disabled={
-                loading ||
-                description.replace(/ /g, "") === "" ||
-                address.replace(/ /g, "") === "" ||
-                (description === reservation.description &&
-                  address === reservation.address &&
-                  new Date(date).toLocaleDateString() ===
-                    new Date(reservation.reservationDate).toLocaleDateString())
-              }
-            >
-              {loading ? "en cours..." : "Modifier"}
-            </Button>
-          ))}
+        {canModify && (
+          <Button
+            type="submit"
+            disabled={
+              loading ||
+              description.replace(/ /g, "") === "" ||
+              address.replace(/ /g, "") === "" ||
+              (description === reservation.description &&
+                address === reservation.address &&
+                new Date(date).toLocaleDateString() ===
+                  new Date(reservation.reservationDate).toLocaleDateString())
+            }
+          >
+            {loading ? "en cours..." : "Modifier"}
+          </Button>
+        )}
       </form>
+    </section>
+  );
+};
+
+const StatusSection = ({ reservation }: { reservation: ReservationType }) => {
+  return (
+    <section className="w-full px-2 py-4 box-border border flex flex-col items-start justify-start gap-3 duration-300 ease-in-out transition-all">
+      <h2 className="font-bold line-clamp-1">
+        Status et autres details de la reservations
+      </h2>
+      <div className="flex gap-1.5 items-center justify-start">
+        <p className="w-16 flex-shrink-0">Status:</p>
+        <p className="font-bold line-clamp-1">{reservation.status}</p>
+      </div>
+      <div className="flex  gap-1.5 items-center justify-start">
+        <p className="w-16 flex-shrink-0">Note:</p>
+        <p className="font-bold line-clamp-1">
+          {reservation.ratings?.rate || 3}
+        </p>
+      </div>
     </section>
   );
 };
