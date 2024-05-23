@@ -31,7 +31,9 @@ const ServiceItem = async ({ service }: Props) => {
         >
           {jobber.images.length > 0 && (
             <Image
-              src={jobber.images[0]}
+              src={
+                service.image ? service.image : "https://github.com/shadcn.png"
+              }
               alt="image service"
               priority
               width={2000}
