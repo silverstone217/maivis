@@ -405,6 +405,12 @@ const StatusSection = ({ reservation }: { reservation: ReservationType }) => {
         <p className="font-bold line-clamp-1">{reservation.status}</p>
       </div>
       <div className="flex  gap-1.5 items-center justify-start">
+        <p className="w-16 flex-shrink-0">Payé:</p>
+        <p className="font-bold line-clamp-1">
+          {reservation.isViewed ? "Deja" : "Pas encore"}
+        </p>
+      </div>
+      <div className="flex  gap-1.5 items-center justify-start">
         <p className="w-16 flex-shrink-0">Note:</p>
         <p className="font-bold line-clamp-1">
           {reservation.ratings?.rate || 3}
