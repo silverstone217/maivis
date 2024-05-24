@@ -92,7 +92,6 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
   const { data: session } = useSession();
   const user = session?.user;
 
-  const chartRef = useRef(null);
   const AcceptData = myBookings.filter((book) => book.status === "accepte");
   const RefuseData = myBookings.filter((book) => book.status === "refuse");
   const AnnuleData = myBookings.filter((book) => book.status === "annule");
@@ -225,7 +224,9 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
             <Archive className="md:size-6 size-4 flex-shrink-0" />
           </div>
           <div>
-            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">45</h2>
+            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">
+              {myBookings.length}
+            </h2>
             <span className="text-xs opacity-80">Depuis 2 jours</span>
           </div>
         </div>
@@ -246,7 +247,9 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
             <CalendarCheck className="md:size-6 size-4 flex-shrink-0" />
           </div>
           <div>
-            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">15</h2>
+            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">
+              {TerminerData.length}
+            </h2>
             <span className="text-xs opacity-80">En une année</span>
           </div>
         </div>
@@ -268,7 +271,9 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
             <CalendarPlus className="md:size-6 size-4 flex-shrink-0" />
           </div>
           <div>
-            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">15</h2>
+            <h2 className="font-black text-2xl lg:text-3xl line-clamp-1">
+              {EnAttenteData.length + AcceptData.length}
+            </h2>
             <span className="text-xs opacity-80">Depuis une semaine</span>
           </div>
         </div>
@@ -317,7 +322,7 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
           <div className="flex flex-col items-start">
             <h2 className="font-bold text-[18px]">Reservations recentes</h2>
             <p className="text-sm opacity-80">
-              Vous avez eu {myBookings.length} en tout.
+              Vous avez eu <strong>{EnAttenteData.length}</strong> en tout.
             </p>
           </div>
           {/* table */}
@@ -325,8 +330,8 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
             className="w-full flex items-start justify-start gap-2 flex-col 
           duration-300 ease-in-out transition-all"
           >
-            {myBookings.length > 0 ? (
-              myBookings.map((booking, index) => (
+            {EnAttenteData.length > 0 ? (
+              EnAttenteData.slice(0, 4).map((booking, index) => (
                 <div
                   key={index}
                   className="w-full flex items-center justify-between gap-4
@@ -364,7 +369,9 @@ const DashboardDataComponent = ({ myJob, setIndexTab, myBookings }: Props) => {
                 </div>
               ))
             ) : (
-              <div>Pas encore de reservation</div>
+              <div className="text-center w-full opacity-80">
+                Pas encore de reservation.
+              </div>
             )}
           </div>
         </div>
