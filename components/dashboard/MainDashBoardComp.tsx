@@ -1,18 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Jobber } from "@prisma/client";
+import { Booking, Jobber, User } from "@prisma/client";
 import DashboardComponent from "./DashboardComponent";
 import MyInfosComponent from "./MyInfosComponent";
 import ActivitiesComponent from "./ActivitiesComponent";
 
 export type IndexTabValue = "dashboard" | "infos" | "activity";
+export type MyBookingDataType = Booking & {
+  user: User;
+};
 
 type Props = {
   myJob: Jobber | null;
+  myBookings: MyBookingDataType[];
 };
 
-const MainDashBoardComp = ({ myJob }: Props) => {
+const MainDashBoardComp = ({ myJob, myBookings }: Props) => {
   const [indexTab, setIndexTab] = useState<IndexTabValue>("dashboard");
 
   return (
@@ -31,7 +35,11 @@ const MainDashBoardComp = ({ myJob }: Props) => {
       </TabsList>
       {/* dashboard */}
       <TabsContent value="dashboard">
-        <DashboardComponent myJob={myJob} setIndexTab={setIndexTab} />
+        <DashboardComponent
+          myJob={myJob}
+          setIndexTab={setIndexTab}
+          myBookings={myBookings}
+        />
       </TabsContent>
 
       {/* infos */}

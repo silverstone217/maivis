@@ -7,7 +7,7 @@ const loading = () => {
       <div className="mt-16" />
       <div className="flex min-h-96 flex-col p-10 lg:p-20 items-center w-full justify-center gap-y-6">
         <LogoComponent />
-        <p className="text-xl">
+        <p className="text-xl text-center text-balance">
           Chez <strong className="text-primary">Maivis</strong> Trouves
           facilement, ce dont tu cherches.
         </p>
